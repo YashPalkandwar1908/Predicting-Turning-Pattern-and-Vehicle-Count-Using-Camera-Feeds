@@ -1,42 +1,55 @@
-# **🚦 Predicting Turning Patterns and Vehicle Count Using Camera Feeds**
+# **Predicting Turning Patterns and Vehicle Count Using Camera Feeds** 🚦🚗
 
-## **📌 Project Overview**
-This project leverages **YOLOv8 (Ultralytics) and DeepSORT** to detect and track vehicles in **live camera feeds or recorded videos**. It predicts **vehicle turning patterns** (Left, Right, Straight) and provides **real-time traffic insights** via a web dashboard built with **Flask**.
+## **📌 Overview**
+
+This project utilizes **YOLOv8 (Ultralytics) and DeepSORT** to detect and track vehicles from **live camera feeds or recorded videos**. It predicts **vehicle turning patterns (Left, Right, Straight)** and provides **real-time traffic insights** through a web dashboard built with **Flask**.
+
+---
+
+## **🎥 Demo Video**
+[![Watch the Demo](static/images/demo_thumbnail.jpg)](https://www.youtube.com/watch?v=your_video_id)
 
 ---
 
 ## **🎯 Features**
 
-- ✅ **Real-time Vehicle Detection** using YOLOv8
-- ✅ **Object Tracking** with DeepSORT
-- ✅ **Turning Pattern Prediction** (Left, Right, Straight)
-- ✅ **Traffic Status Monitoring**
-- ✅ **SQLite Database Storage**
-- ✅ **Web Dashboard for Visualization**
+✅ **Real-time Vehicle Detection** using YOLOv8\  
+✅ **Object Tracking** with DeepSORT\  
+✅ **Turning Pattern Classification** (Left, Right, Straight)\  
+✅ **Traffic Status Estimation** (Normal or Heavy Traffic)\  
+✅ **Data Storage in SQLite Database (`vehicles.db`)**\  
+✅ **Web Dashboard** to visualize traffic statistics
 
 ---
 
 ## **📂 Project Structure**
 
 ```
-Predicting-Turning-Pattern-and-Vehicle-Count/
+Predicting turning pattern and vehicle count using camera feeds/
 │── my_virtual_env/         # Virtual environment  
-│── static/                 # CSS, images, videos  
-│── templates/              # HTML templates  
-│── app.py                  # Flask web app  
+│── static/                 # Contains CSS for UI and media files  
+│   ├── images/             # Images & GIFs  
+│   │   ├── yolo_detection.gif  
+│   │   ├── demo_thumbnail.jpg  
+│   ├── videos/             # Sample videos  
+│   │   ├── intersection2.mp4  
+│   ├── style.css  
+│── templates/              # HTML templates for Flask  
+│   ├── index.html  
+│── app.py                  # Flask backend for the web dashboard  
 │── test.py                 # Runs object detection & tracking  
-│── requirements.txt        # Dependencies  
-│── vehicles.db             # SQLite database  
-│── coco.txt                # Class labels for YOLO  
-│── yolov8s.pt              # Pre-trained YOLO model  
-│── intersection2.mp4       # Sample video  
+│── requirements.txt        # List of dependencies  
+│── vehicles.db             # SQLite database storing vehicle counts  
+│── coco.txt                # Class labels for YOLOv8  
+│── yolov8s.pt              # Pre-trained YOLOv8 model  
 ```
 
 ---
 
-## **🚀 Setup & Installation**
+## **🚀 How to Run**
 
-### **1️⃣ Create a virtual environment:**
+### **1️⃣ Set up a virtual environment:**
+
 ```sh
 python -m venv my_virtual_env
 my_virtual_env\Scripts\activate  # (Windows)
@@ -44,24 +57,48 @@ source my_virtual_env/bin/activate  # (Mac/Linux)
 ```
 
 ### **2️⃣ Install dependencies:**
+
 ```sh
 pip install -r requirements.txt
 ```
 
 ### **3️⃣ Run object detection & tracking:**
+
 ```sh
 python test.py
 ```
 
-### **4️⃣ Start the Flask web app:**
+### **4️⃣ Start the Flask web dashboard:**
+
 ```sh
 python app.py
 ```
 
-### **5️⃣ Access the dashboard at:**
+### **5️⃣ View real-time traffic insights at:**
+
 ```
 http://127.0.0.1:5003/
 ```
+
+---
+
+## **🛠️ How It Works (User Guide)**
+
+1️⃣ **Video Input:** The system takes input from either a live camera feed or a recorded video.  
+2️⃣ **YOLOv8 Detection:** The model identifies and classifies vehicles such as cars, buses, and motorcycles in real-time.  
+3️⃣ **DeepSORT Tracking:** Detected vehicles are assigned unique IDs and tracked across frames.  
+4️⃣ **Turning Pattern Prediction:** By analyzing movement direction, the system predicts whether a vehicle is turning left, right, or going straight.  
+5️⃣ **Database Storage:** All detections and turning patterns are logged in an SQLite database (`vehicles.db`).  
+6️⃣ **Flask Dashboard:** The web interface updates in real-time, displaying vehicle count, turning statistics, and traffic status.  
+
+---
+
+## **📊 Traffic Analysis**
+![YOLOv8 in Action](static/images/yolo_detection.gif)
+
+<video width="600" controls>
+    <source src="static/videos/intersection2.mp4" type="video/mp4">
+</video>
 
 ---
 
@@ -69,8 +106,8 @@ http://127.0.0.1:5003/
 
 - **Python**
 - **Flask** (Web dashboard)
-- **OpenCV** (Video processing)
-- **YOLOv8** (Object detection)
+- **OpenCV (cv2)** (Video processing)
+- **YOLOv8 (Ultralytics)** (Object detection)
 - **DeepSORT** (Object tracking)
 - **SQLite** (Database storage)
 
@@ -78,13 +115,14 @@ http://127.0.0.1:5003/
 
 ## **📌 Future Enhancements**
 
-- 🚀 **Real-time Speed Estimation**
-- 📡 **Integration with Live CCTV Feeds**
-- 📊 **Advanced Traffic Analytics with AI**
+- 🚀 Add **real-time speed estimation** for vehicles
+- 📡 Support for **live CCTV feeds**
+- 📊 Improve traffic analysis with **machine learning models**
 
 ---
 
-## **🌟 Contribute & Feedback**
+## **🌟 Contributions & Feedback**
 
-Feel free to fork, modify, or suggest improvements!\
+Feel free to fork, modify, or suggest improvements!\  
 💬 **Have an idea? Open an issue!**
+
