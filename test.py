@@ -15,7 +15,7 @@ model = YOLO('yolov8s.pt')
 deepsort = DeepSort(max_age=30, n_init=3)
 
 # Open video file or webcam
-cap = cv2.VideoCapture('./static/videos/intersection2.mp4')  # Replace with 0 for webcam
+cap = cv2.VideoCapture('./static/videos/cars.mp4')  # Replace with 0 for webcam
 
 # Load class labels (COCO dataset)
 with open("coco.txt", "r") as file:
