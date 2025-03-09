@@ -1,0 +1,18 @@
+# Ignore virtual environment
+my_virtual_env/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore SQLite database
+vehicles.db
+
+# Ignore large files (models)
+yolov8s.pt
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.DS_Store
