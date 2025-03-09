@@ -4,12 +4,19 @@
 
 This project utilizes **YOLOv8 (Ultralytics) and DeepSORT** to detect and track vehicles from **live camera feeds or recorded videos**. It predicts **vehicle turning patterns (Left, Right, Straight)** and provides **real-time traffic insights** through a web dashboard built with **Flask**.
 
+<!-- 
 ---
 
 ## **🎥 Demo Video**
-[![Watch the Demo](static/images/demo_thumbnail.jpg)](https://www.youtube.com/watch?v=your_video_id)
+<p align="center">
+    <a href="https://www.youtube.com/watch?v=your_video_id">
+        <img src="static/images/demo_thumbnail.jpg" alt="Watch the Demo">
+    </a>
+</p>
+
 
 ---
+ -->
 
 ## **🎯 Features**
 
@@ -83,16 +90,13 @@ http://127.0.0.1:5003/
 ---
 
 ## **📊 Traffic Analysis**
-![YOLOv8 in Action](static/images/yolo_detection.gif)
-
-<video width="600" controls>
-    <source src="static/videos/intersection2.mp4" type="video/mp4">
-</video>
 
 ### **Detection & Tracking in Action**
 
-![Intersection Traffic](static/rec1.gif)
-![Highway Traffic](static/rec2.gif)
+<p align="center">
+    <img src="static/images/rec1.gif" width="40%" style="padding:15px;">
+    <img src="static/images/rec2.gif" width="40%" style="padding:15px;">
+</p>
 
 ---
 
