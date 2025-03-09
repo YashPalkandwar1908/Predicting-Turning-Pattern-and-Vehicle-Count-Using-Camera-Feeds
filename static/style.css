@@ -1,1 +1,121 @@
- 
+:root {
+    --font-family: 'Arial', sans-serif;
+    --bg-image: url('/static/images/bd_image.jpg');
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    --container-bg: rgba(255, 255, 255, 0.1);
+    --box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    --text-color: #ffffff;
+    --primary-color: #f39c12;
+    --stat-bg: rgba(211, 211, 211, 0.6);
+    --stat-text: #343a40;
+    --border-color: rgba(255, 255, 255, 0.3);
+    --success-color: #46e946;
+    --danger-color: #ff0000;
+    --footer-color: #d2d0d0;
+    --border-radius: 8px;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background: var(--bg-image) no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+}
+
+.overlay {
+    background-color: var(--bg-overlay);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    color: var(--text-color);
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    flex: 1 1 calc(33.333% - 20px);
+    background-color: var(--stat-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    color: var(--stat-text);
+}
+
+.stat h2 {
+    margin-bottom: 15px;
+    color: var(--stat-text);
+}
+
+.stat p {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.traffic-status {
+    color: var(--success-color);
+}
+
+.traffic-status.danger {
+    color: var(--danger-color);
+}
+
+.turning-patterns {
+    margin-top: 40px;
+}
+
+.turning-patterns table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.turning-patterns th,
+.turning-patterns td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: center;
+}
+
+.turning-patterns th {
+    background-color: var(--primary-color);
+    color: #000;
+    font-size: 1.1em;
+}
+
+.turning-patterns td {
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--footer-color);
+}
+
+@media (max-width: 768px) {
+    .stat {
+        flex: 1 1 100%;
+    }
+}

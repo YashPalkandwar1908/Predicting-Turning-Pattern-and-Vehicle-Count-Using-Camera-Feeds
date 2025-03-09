@@ -1,1 +1,63 @@
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Count and Traffic Monitoring Dashboard</title>
+    <link rel="stylesheet" href="../static/style.css">
+
+    <meta http-equiv="refresh" content="3">
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <h1>Vehicle Count and Traffic Monitoring Dashboard</h1>
+
+            <div class="stats">
+                <div class="stat">
+                    <h2>Total Vehicle Count</h2>
+                    <p>{{ vehicle_count }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Traffic Status</h2>
+                    <p class="traffic-status">{{ traffic_status }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Vehicles Currently in Frame</h2>
+                    <p>{{ current_vehicle_count }}</p>
+                </div>
+            </div>
+
+            <div class="turning-patterns">
+                <h3>Turning Patterns</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Turning Pattern</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Right Turns</td>
+                            <td>{{ turning_stats['Right Turn'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Left Turns</td>
+                            <td>{{ turning_stats['Left Turn'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Going Straight</td>
+                            <td>{{ turning_stats['Going Straight'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="footer">
+                <p>&copy; 2024 Vehicle Monitoring System</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
