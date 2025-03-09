@@ -82,23 +82,17 @@ http://127.0.0.1:5003/
 
 ---
 
-## **🛠️ How It Works (User Guide)**
-
-1️⃣ **Video Input:** The system takes input from either a live camera feed or a recorded video.  
-2️⃣ **YOLOv8 Detection:** The model identifies and classifies vehicles such as cars, buses, and motorcycles in real-time.  
-3️⃣ **DeepSORT Tracking:** Detected vehicles are assigned unique IDs and tracked across frames.  
-4️⃣ **Turning Pattern Prediction:** By analyzing movement direction, the system predicts whether a vehicle is turning left, right, or going straight.  
-5️⃣ **Database Storage:** All detections and turning patterns are logged in an SQLite database (`vehicles.db`).  
-6️⃣ **Flask Dashboard:** The web interface updates in real-time, displaying vehicle count, turning statistics, and traffic status.  
-
----
-
 ## **📊 Traffic Analysis**
 ![YOLOv8 in Action](static/images/yolo_detection.gif)
 
 <video width="600" controls>
     <source src="static/videos/intersection2.mp4" type="video/mp4">
 </video>
+
+### **Detection & Tracking in Action**
+
+![Intersection Traffic](static/rec1.gif)
+![Highway Traffic](static/rec2.gif)
 
 ---
 
