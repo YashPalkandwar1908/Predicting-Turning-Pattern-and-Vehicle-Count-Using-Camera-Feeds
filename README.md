@@ -121,6 +121,6 @@ http://127.0.0.1:5003/
 
 ## **🌟 Contributions & Feedback**
 
-Feel free to fork, modify, or suggest improvements!\  
+Feel free to fork, modify, or suggest improvements!  
 💬 **Have an idea? Open an issue!**
 
