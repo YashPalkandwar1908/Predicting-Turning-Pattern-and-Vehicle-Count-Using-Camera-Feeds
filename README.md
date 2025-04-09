@@ -1,4 +1,11 @@
 # **Predicting Turning Patterns and Vehicle Count Using Camera Feeds** 🚦🚗
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10-blue" alt="Python">
+  <img src="https://img.shields.io/badge/YOLOv8-Ultralytics-yellow" alt="YOLOv8">
+  <img src="https://img.shields.io/badge/Flask-2.2-lightgrey" alt="Flask">
+  <img src="https://img.shields.io/badge/SQL-Database-blue" alt="SQL">
+</p>
+
 
 ## **📌 Overview**
 
@@ -17,6 +24,7 @@ This project utilizes **YOLOv8 (Ultralytics) and DeepSORT** to detect and track 
 
 ---
  -->
+
 
 ## **🎯 Features**
 
