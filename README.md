@@ -108,14 +108,21 @@ http://127.0.0.1:5003/
 
 ---
 
-## **🔧 Technologies Used**
+## 🔧 Technologies Used
 
-- **Python**
-- **Flask** (Web dashboard)
-- **OpenCV (cv2)** (Video processing)
-- **YOLOv8 (Ultralytics)** (Object detection)
-- **DeepSORT** (Object tracking)
-- **SQLite** (Database storage)
+| **Category**            | **Technology**             | **Purpose**                                                             |
+|-------------------------|----------------------------|--------------------------------------------------------------------------|
+| 🐍 **Programming Language** | Python 3.10                 | Core language for backend, logic, and video processing                   |
+| 🧠 **Object Detection**      | YOLOv8 (Ultralytics)        | Detects vehicles in real-time from camera feeds                          |
+| 🔄 **Object Tracking**       | DeepSORT                    | Tracks vehicles across frames to maintain unique IDs                     |
+| 🎥 **Video Processing**      | OpenCV (`cv2`)               | Handles frame extraction, drawing boxes, and visual output               |
+| 🌐 **Web Framework**         | Flask 2.2                   | Powers the web dashboard to display insights and stats                   |
+| 🗃️ **Database**              | SQLite                      | Stores vehicle counts, turning directions, and timestamps                |
+| 🧾 **Data Handling**         | NumPy, Pandas               | Optional: for traffic data aggregation and analysis                      |
+| 🎨 **Frontend**              | HTML, CSS, JavaScript       | Renders the dashboard UI with statistics and live data                   |
+| 📦 **Model File**            | `yolov8s.pt`                | Pre-trained YOLOv8 model weights for detection                           |
+| 📋 **Labels File**           | `coco.txt`                  | Contains class names for object detection                                |
+
 
 ---
 
