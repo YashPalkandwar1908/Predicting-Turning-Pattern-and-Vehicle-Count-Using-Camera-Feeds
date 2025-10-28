@@ -28,11 +28,11 @@ This project utilizes **YOLOv8 (Ultralytics) and DeepSORT** to detect and track 
 
 ## **🎯 Features**
 
-✅ **Real-time Vehicle Detection** using YOLOv8\  
-✅ **Object Tracking** with DeepSORT\  
-✅ **Turning Pattern Classification** (Left, Right, Straight)\  
-✅ **Traffic Status Estimation** (Normal or Heavy Traffic)\  
-✅ **Data Storage in SQLite Database (`vehicles.db`)**\  
+✅ **Real-time Vehicle Detection** using YOLOv8  
+✅ **Object Tracking** with DeepSORT  
+✅ **Turning Pattern Classification** (Left, Right, Straight)  
+✅ **Traffic Status Estimation** (Normal or Heavy Traffic)  
+✅ **Data Storage in SQLite Database (`vehicles.db`)**  
 ✅ **Web Dashboard** to visualize traffic statistics
 
 ---
@@ -41,22 +41,32 @@ This project utilizes **YOLOv8 (Ultralytics) and DeepSORT** to detect and track 
 
 ```
 Predicting turning pattern and vehicle count using camera feeds/
-│── my_virtual_env/         # Virtual environment  
-│── static/                 # Contains CSS for UI and media files  
-│   ├── images/             # Images & GIFs  
+│
+│── my_virtual_env/               # Virtual environment
+│
+│── static/                       # Contains CSS for UI and media files
+│
+│   ├── images/                   # Images & GIFs  
 │   │   ├── yolo_detection.gif  
 │   │   ├── demo_thumbnail.jpg  
-│   ├── videos/             # Sample videos  
+│   ├── videos/                   # Sample videos  
 │   │   ├── intersection2.mp4  
-│   ├── style.css  
-│── templates/              # HTML templates for Flask  
-│   ├── index.html  
-│── app.py                  # Flask backend for the web dashboard  
-│── test.py                 # Runs object detection & tracking  
-│── requirements.txt        # List of dependencies  
-│── vehicles.db             # SQLite database storing vehicle counts  
-│── coco.txt                # Class labels for YOLOv8  
-│── yolov8s.pt              # Pre-trained YOLOv8 model  
+│   ├── style.css
+│
+│── templates/                    # HTML templates for Flask  
+│   ├── index.html
+│
+│── app.py                        # Flask backend for the web dashboard
+│
+│── test.py                       # Runs object detection & tracking
+│
+│── requirements.txt              # List of dependencies
+│
+│── vehicles.db                   # SQLite database storing vehicle counts
+│
+│── coco.txt                      # Class labels for YOLOv8
+│
+│── yolov8s.pt                    # Pre-trained YOLOv8 model  
 ```
 
 ---
