@@ -1,126 +1,226 @@
 # Predicting Turning Patterns and Vehicle Count Using Camera Feeds 🚦🚗
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/YOLOv8-Ultralytics-yellow" alt="YOLOv8">
-  <img src="https://img.shields.io/badge/DeepSORT-Object%20Tracking-green" alt="DeepSORT">
-  <img src="https://img.shields.io/badge/Flask-2.2-lightgrey?logo=flask" alt="Flask">
-  <img src="https://img.shields.io/badge/SQLite-Database-blue?logo=sqlite" alt="SQLite">
+  <img src="https://img.shields.io/badge/Python-3.10-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10">
+  <img src="https://img.shields.io/badge/YOLOv8-Ultralytics-111111?style=for-the-badge" alt="YOLOv8">
+  <img src="https://img.shields.io/badge/DeepSORT-Object%20Tracking-2E8B57?style=for-the-badge" alt="DeepSORT">
+  <img src="https://img.shields.io/badge/Flask-2.2-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+  <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
 </p>
 
-A computer vision-based traffic monitoring system that detects, tracks, counts, and analyzes vehicles from camera feeds while identifying their turning patterns as **Left, Right, or Straight**.
+<p align="center">
+  <strong>Real-time computer vision system for vehicle detection, tracking, counting, and turning-pattern analysis.</strong>
+</p>
 
 ---
 
 ## 📌 Overview
 
-**Predicting Turning Patterns and Vehicle Count Using Camera Feeds** is a real-time traffic analysis system built using **YOLOv8, DeepSORT, OpenCV, and Flask**.
+**Predicting Turning Patterns and Vehicle Count Using Camera Feeds** is a computer vision-based traffic monitoring system that analyzes traffic camera footage to detect and track vehicles, count individual vehicles, and classify their movement as:
 
-The system processes live camera feeds or recorded traffic videos to detect and track vehicles, assign unique tracking IDs, determine their movement direction, and store traffic statistics in a SQLite database.
+- ↩️ Left
+- ↪️ Right
+- ⬆️ Straight
 
-The collected information is presented through a **Flask-based web dashboard**, providing a simple interface for monitoring vehicle counts, turning patterns, and overall traffic conditions.
+The system combines **YOLOv8**, **DeepSORT**, **OpenCV**, **Flask**, and **SQLite** to process traffic video and present the resulting information through a web dashboard.
+
+It can work with recorded traffic videos and can be extended to support live camera or CCTV/IP streams.
 
 ---
 
 ## ✨ Features
 
-* 🚗 **Real-Time Vehicle Detection** using YOLOv8
-* 🎯 **Vehicle Tracking** using DeepSORT
-* ↩️ **Turning Pattern Detection** — Left, Right, and Straight
-* 🔢 **Vehicle Counting** based on tracked objects
-* 🚦 **Traffic Status Estimation** — Normal or Heavy Traffic
-* 💾 **SQLite Database Storage** for traffic statistics
-* 🌐 **Flask Web Dashboard** for displaying results
-* 🎥 **Video Processing** using OpenCV
-* 📊 **Traffic Data Analysis** using stored vehicle information
-* 🆔 **Unique Vehicle Tracking IDs** to prevent duplicate counting
+| Feature | Description |
+|---|---|
+| 🚗 Vehicle Detection | Detects vehicles using YOLOv8 |
+| 🎯 Object Tracking | Tracks vehicles across frames using DeepSORT |
+| ↩️ Turning Classification | Identifies Left, Right, and Straight movement |
+| 🔢 Vehicle Counting | Counts tracked vehicles while reducing duplicate counting |
+| 🆔 Tracking IDs | Maintains unique IDs for tracked vehicles |
+| 🚦 Traffic Status | Estimates traffic as Normal or Heavy |
+| 💾 Data Storage | Stores traffic information using SQLite |
+| 🌐 Web Dashboard | Displays traffic statistics through Flask |
+| 🎥 Video Processing | Processes recorded traffic footage using OpenCV |
+| 📊 Traffic Analysis | Aggregates vehicle and movement information |
 
 ---
 
-## 🧠 How It Works
-
-The system follows a multi-stage computer vision pipeline:
+## 🧠 System Architecture
 
 ```text
-Camera Feed / Video
-        │
-        ▼
-   YOLOv8 Detection
-        │
-        ▼
-    DeepSORT Tracking
-        │
-        ▼
- Vehicle Movement Tracking
-        │
-        ▼
-Turning Pattern Classification
-        │
-        ├── Left
-        ├── Right
-        └── Straight
-        │
-        ▼
- Vehicle Count & Traffic Analysis
-        │
-        ▼
-   SQLite Database
-        │
-        ▼
-   Flask Web Dashboard
+┌─────────────────────────┐
+│   Camera Feed / Video   │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│     YOLOv8 Detection    │
+│     Vehicle Detection   │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│    DeepSORT Tracking    │
+│     Unique Track IDs    │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│   Movement Trajectory   │
+│       Analysis          │
+└────────────┬────────────┘
+             │
+       ┌─────┼─────┐
+       ▼     ▼     ▼
+     LEFT  RIGHT  STRAIGHT
+       │     │     │
+       └─────┼─────┘
+             │
+             ▼
+┌─────────────────────────┐
+│ Vehicle Count & Traffic │
+│       Analysis           │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│     SQLite Database     │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│    Flask Web Dashboard  │
+└─────────────────────────┘
 ```
 
-### Detection
+---
 
-YOLOv8 identifies vehicles such as cars, motorcycles, buses, and trucks within each video frame.
+## 🔍 How It Works
 
-### Tracking
+### 1. Vehicle Detection
 
-DeepSORT assigns a unique ID to detected vehicles and maintains their identity across consecutive frames.
+YOLOv8 processes each video frame and identifies supported vehicle classes such as:
 
-### Turning Pattern Classification
+- Cars
+- Motorcycles
+- Buses
+- Trucks
 
-The movement of each tracked vehicle is analyzed across frames to determine whether it is:
+Bounding boxes are generated for detected objects.
 
-* **Left Turn**
-* **Right Turn**
-* **Straight**
+### 2. Vehicle Tracking
 
-### Traffic Analysis
+DeepSORT associates detections across consecutive frames and assigns unique tracking IDs.
 
-Vehicle counts and movement information are used to estimate the current traffic condition.
+This allows the system to follow the same vehicle through the intersection instead of treating every frame detection as a new vehicle.
+
+### 3. Movement Analysis
+
+The tracked vehicle positions are analyzed over time.
+
+Based on the movement trajectory, the system classifies vehicles into:
+
+```text
+        LEFT
+          ↖
+           \
+            \
+             ● ─────────→ STRAIGHT
+            /
+           /
+          ↘
+        RIGHT
+```
+
+### 4. Vehicle Counting
+
+Tracking IDs are used to avoid counting the same tracked vehicle repeatedly.
+
+### 5. Traffic Analysis
+
+The collected vehicle information is used to calculate traffic statistics and estimate the current traffic condition.
+
+### 6. Dashboard
+
+The processed information is stored in SQLite and displayed through a Flask-based web dashboard.
+
+---
+
+## 📊 Traffic Metrics
+
+The system records information such as:
+
+| Metric | Description |
+|---|---|
+| 🚗 Vehicle Count | Number of tracked vehicles |
+| ↩️ Left Turns | Vehicles classified as left-turning |
+| ↪️ Right Turns | Vehicles classified as right-turning |
+| ⬆️ Straight | Vehicles continuing straight |
+| 🚦 Traffic Status | Current estimated traffic condition |
+| 🕒 Timestamp | Time associated with recorded traffic data |
+
+---
+
+## 🎥 Detection & Tracking
+
+<p align="center">
+  <img src="static/images/yolo_detection.gif" width="80%" alt="YOLOv8 Vehicle Detection">
+</p>
+
+<p align="center">
+  <img src="static/images/rec1.gif" width="42%" alt="Vehicle Detection">
+  <img src="static/images/rec2.gif" width="42%" alt="Vehicle Tracking">
+</p>
+
+---
+
+## 🛠️ Technology Stack
+
+| Category | Technology | Purpose |
+|---|---|---|
+| Programming Language | Python 3.10 | Core application and computer vision logic |
+| Object Detection | YOLOv8 | Vehicle detection |
+| Object Tracking | DeepSORT | Multi-object tracking |
+| Computer Vision | OpenCV | Video and frame processing |
+| Web Framework | Flask 2.2 | Traffic monitoring dashboard |
+| Database | SQLite | Traffic data storage |
+| Data Processing | NumPy / Pandas | Data processing and analysis |
+| Frontend | HTML / CSS / JavaScript | Dashboard interface |
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-Predicting turning pattern and vehicle count using camera feeds/
-│
-├── my_virtual_env/                  # Python virtual environment
+Predicting-Turning-Pattern-and-Vehicle-Count-Using-Camera-Feeds/
 │
 ├── static/
 │   ├── images/
-│   │   ├── yolo_detection.gif       # YOLO detection demonstration
-│   │   ├── rec1.gif                 # Traffic detection recording
-│   │   ├── rec2.gif                 # Traffic detection recording
-│   │   └── demo_thumbnail.jpg       # Demo thumbnail
+│   │   ├── yolo_detection.gif
+│   │   ├── rec1.gif
+│   │   ├── rec2.gif
+│   │   └── demo_thumbnail.jpg
 │   │
 │   ├── videos/
-│   │   └── intersection2.mp4        # Sample traffic video
+│   │   └── intersection2.mp4
 │   │
-│   └── style.css                    # Dashboard styling
+│   └── style.css
 │
 ├── templates/
-│   └── index.html                   # Flask dashboard interface
+│   └── index.html
 │
-├── app.py                            # Flask web application
-├── test.py                           # Detection and tracking pipeline
-├── requirements.txt                  # Python dependencies
-├── vehicles.db                       # SQLite traffic database
-├── coco.txt                          # YOLO class labels
-└── yolov8s.pt                        # YOLOv8 model weights
+├── app.py
+├── test.py
+├── requirements.txt
+├── vehicles.db
+├── coco.txt
+├── yolov8s.pt
+├── LICENSE.md
+└── README.md
 ```
+
+> `my_virtual_env/` is intentionally excluded from the repository structure because virtual environments should normally be created locally rather than committed to Git.
 
 ---
 
@@ -130,11 +230,11 @@ Predicting turning pattern and vehicle count using camera feeds/
 
 Make sure the following are installed:
 
-* Python 3.10
-* pip
-* Git
-* A compatible camera or traffic video
-* Sufficient system resources for YOLOv8 inference
+- Python 3.10
+- pip
+- Git
+- A compatible traffic video or camera source
+- Sufficient hardware resources for YOLOv8 inference
 
 ---
 
@@ -142,30 +242,38 @@ Make sure the following are installed:
 
 ### 1. Clone the Repository
 
-```sh
-git clone <your-repository-url>
-cd "Predicting turning pattern and vehicle count using camera feeds"
+```bash
+git clone https://github.com/YashPalkandwar1908/Predicting-Turning-Pattern-and-Vehicle-Count-Using-Camera-Feeds.git
+
+cd Predicting-Turning-Pattern-and-Vehicle-Count-Using-Camera-Feeds
 ```
 
 ### 2. Create a Virtual Environment
 
 #### Windows
 
-```sh
+```powershell
 python -m venv my_virtual_env
+
+.\my_virtual_env\Scripts\Activate.ps1
+```
+
+If PowerShell execution policy prevents activation, you can also run:
+
+```powershell
 my_virtual_env\Scripts\activate
 ```
 
 #### macOS / Linux
 
-```sh
+```bash
 python3 -m venv my_virtual_env
 source my_virtual_env/bin/activate
 ```
 
 ### 3. Install Dependencies
 
-```sh
+```bash
 pip install -r requirements.txt
 ```
 
@@ -173,23 +281,23 @@ pip install -r requirements.txt
 
 ## ▶️ Running the Project
 
-### Run Vehicle Detection and Tracking
+### Start Vehicle Detection and Tracking
 
-```sh
+```bash
 python test.py
 ```
 
-This starts the vehicle detection and tracking pipeline using YOLOv8 and DeepSORT.
+This starts the computer vision pipeline for vehicle detection, tracking, counting, and movement analysis.
 
 ### Start the Flask Dashboard
 
 Open another terminal and run:
 
-```sh
+```bash
 python app.py
 ```
 
-The dashboard will be available at:
+The dashboard runs locally at:
 
 ```text
 http://127.0.0.1:5003/
@@ -197,122 +305,97 @@ http://127.0.0.1:5003/
 
 ---
 
-## 📊 Traffic Analysis
+## 🖥️ Dashboard
 
-The system provides information such as:
+The Flask dashboard provides a simple interface for viewing processed traffic information.
 
-| Metric            | Description                                |
-| ----------------- | ------------------------------------------ |
-| 🚗 Vehicle Count  | Total number of detected vehicles          |
-| ↩️ Left Turns     | Vehicles classified as turning left        |
-| ↪️ Right Turns    | Vehicles classified as turning right       |
-| ⬆️ Straight       | Vehicles continuing straight               |
-| 🚦 Traffic Status | Normal or Heavy traffic                    |
-| 🕒 Timestamp      | Time associated with recorded traffic data |
+The dashboard can be used to display:
 
----
-
-## 🎥 Detection & Tracking
-
-<p align="center">
-  <img src="static/images/rec1.gif" width="42%" alt="Vehicle Detection">
-  <img src="static/images/rec2.gif" width="42%" alt="Vehicle Tracking">
-</p>
-
-The system combines object detection and tracking to follow individual vehicles through the intersection and analyze their movement.
+- Total vehicle count
+- Left-turn count
+- Right-turn count
+- Straight-moving vehicle count
+- Traffic status
+- Stored traffic information
 
 ---
 
-## 🛠️ Technologies Used
-
-| Category                | Technology              | Purpose                                       |
-| ----------------------- | ----------------------- | --------------------------------------------- |
-| 🐍 Programming Language | Python 3.10             | Core application and computer vision logic    |
-| 🧠 Object Detection     | YOLOv8                  | Detects vehicles in video frames              |
-| 🔄 Object Tracking      | DeepSORT                | Maintains unique vehicle identities           |
-| 🎥 Video Processing     | OpenCV                  | Processes frames and video streams            |
-| 🌐 Web Framework        | Flask 2.2               | Provides the traffic monitoring dashboard     |
-| 🗃️ Database            | SQLite                  | Stores vehicle and traffic statistics         |
-| 📊 Data Processing      | NumPy / Pandas          | Handles numerical and traffic data processing |
-| 🎨 Frontend             | HTML / CSS / JavaScript | Dashboard interface                           |
-| 🤖 Model                | `yolov8s.pt`            | Pre-trained YOLOv8 model                      |
-| 📋 Labels               | `coco.txt`              | Object detection class labels                 |
-
----
-
-## 📁 Important Files
-
-### `app.py`
-
-Runs the Flask web application and provides the traffic monitoring dashboard.
-
-### `test.py`
-
-Contains the main vehicle detection, tracking, and movement analysis pipeline.
-
-### `vehicles.db`
-
-SQLite database used to store traffic-related information.
-
-### `yolov8s.pt`
-
-Pre-trained YOLOv8 model used for vehicle detection.
-
-### `coco.txt`
-
-Contains the object classes used by the detection model.
-
----
-
-## 📈 Example Workflow
+## 📈 Example Processing Pipeline
 
 ```text
-        Traffic Camera
-              │
-              ▼
-       Video Frame Input
-              │
-              ▼
-        YOLOv8 Detection
-              │
-              ▼
-        Vehicle Detection
-              │
-              ▼
-        DeepSORT Tracking
-              │
-              ▼
-      Track Vehicle Movement
-              │
-        ┌─────┼─────┐
-        ▼     ▼     ▼
-      Left  Right  Straight
-        │     │     │
-        └─────┼─────┘
-              ▼
-       Vehicle Statistics
-              │
-              ▼
-        SQLite Database
-              │
-              ▼
-       Flask Web Dashboard
+Traffic Camera
+      │
+      ▼
+Video Frame
+      │
+      ▼
+YOLOv8
+      │
+      ▼
+Vehicle Detection
+      │
+      ▼
+DeepSORT
+      │
+      ▼
+Unique Vehicle ID
+      │
+      ▼
+Trajectory Tracking
+      │
+      ├─────────────┬─────────────┐
+      ▼             ▼             ▼
+    Left          Right        Straight
+      │             │             │
+      └─────────────┼─────────────┘
+                    ▼
+             Vehicle Statistics
+                    │
+                    ▼
+              SQLite Database
+                    │
+                    ▼
+             Flask Dashboard
 ```
 
 ---
 
 ## 🔮 Future Enhancements
 
-* 🚀 Real-time **vehicle speed estimation**
-* 📡 Support for **live CCTV/IP camera streams**
-* 🤖 Machine learning-based **traffic prediction**
-* 🚦 Automated **traffic signal optimization**
-* 📍 Multi-intersection traffic monitoring
-* 📊 Advanced traffic analytics and historical reports
-* ☁️ Cloud-based traffic monitoring
-* 📱 Mobile-friendly traffic monitoring dashboard
-* 🧠 Improved turning-pattern classification
-* 🚘 Vehicle-type-specific traffic analysis
+The project can be extended with:
+
+- 🚀 Real-time vehicle speed estimation
+- 📡 Live CCTV/IP camera support
+- 🤖 Machine-learning-based traffic forecasting
+- 🚦 Traffic signal optimization
+- 📍 Multi-intersection monitoring
+- 📊 Historical traffic analytics
+- ☁️ Cloud deployment
+- 📱 Mobile-friendly dashboard
+- 🚘 Vehicle-type-specific analytics
+- 🧠 Improved trajectory and turning classification
+- 🔥 Traffic-density heatmaps
+- 📈 Time-based traffic trend analysis
+
+---
+
+## ⚠️ Current Limitations
+
+The current implementation is primarily a prototype/educational traffic-analysis system.
+
+Performance can vary depending on:
+
+- Camera angle
+- Video resolution
+- Lighting conditions
+- Vehicle occlusion
+- Traffic density
+- Camera movement
+- Detection quality
+- Tracking stability
+- Intersection geometry
+
+Turning classification is based on tracked vehicle movement and therefore depends on the quality and consistency of the trajectory data.
 
 ---
 
@@ -320,26 +403,34 @@ Contains the object classes used by the detection model.
 
 Contributions, suggestions, and improvements are welcome.
 
-If you would like to improve the project:
+To contribute:
 
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Test the implementation
-5. Submit a pull request
-
----
-
-## 💬 Feedback
-
-Found a bug or have an idea for improving the system?
-
-Open an issue and describe the problem or proposed enhancement.
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes.
+4. Test the implementation.
+5. Commit your changes.
+6. Push the branch.
+7. Open a Pull Request.
 
 ---
 
-## 📜 License
+## ⭐ Acknowledgements
 
-This project is intended for educational and research purposes.
+This project uses and builds upon several open-source technologies, including:
 
-Please check the repository for the applicable license and third-party model/software licenses before redistributing the project.
+- Ultralytics YOLOv8
+- DeepSORT
+- OpenCV
+- Flask
+- SQLite
+- NumPy
+- Pandas
+
+Please refer to the respective projects for their licensing and usage terms.
+
+---
+
+<p align="center">
+  Built with Python, Computer Vision & AI 🚦
+</p>
